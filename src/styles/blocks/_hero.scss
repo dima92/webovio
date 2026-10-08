@@ -1,0 +1,91 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  @include flex(column, center, normal);
+  padding-top: fluid(180, 120);
+  padding-bottom: fluid(120, 80);
+  background-color: $accent-color;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: url("../../assets/images/hero-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+
+    @include respond-to("tablet") {
+      @include flex(column, center, center);
+      text-align: center;
+    }
+  }
+
+  &__content {
+    max-width: to-rem(616);
+  }
+
+  &__subtitle {
+    @include flex(row, center, center, $isInline: true);
+    color: $white-color;
+    font-weight: 400;
+    margin-bottom: to-rem(22);
+    @include fluid-text(14, 12);
+  }
+
+  &__title {
+    font-weight: 700;
+    color: $white-color;
+    margin-bottom: to-rem(24);
+    @include fluid-text(60, 32, 1.23);
+  }
+
+  &__description {
+    max-width: to-rem(581);
+    font-weight: 400;
+    color: $white-color;
+    margin-bottom: to-rem(45);
+    @include fluid-text(16, 14, 1.63);
+  }
+}
+
+.btn {
+  @include flex(row, flex-start, center, $isInline: true, $gap: 12);
+  color: $yellow-color;
+  font-weight: 700;
+  @include fluid-text(16, 14);
+  border-bottom: to-rem(1) solid $yellow-color;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: to-rem(5) solid transparent;
+    border-bottom: to-rem(5) solid transparent;
+    border-left: to-rem(8) solid $yellow-color;
+  }
+
+  &:hover {
+    color: $white-color;
+    border-bottom-color: $white-color;
+    transform: translateX(to-rem(4));
+
+    &::before {
+      border-left-color: $white-color;
+    }
+  }
+}

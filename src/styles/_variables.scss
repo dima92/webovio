@@ -1,0 +1,29 @@
+@use "helpers/functions" as *;
+
+// Сетка
+$container-width: 1110;
+$container-padding-x: 15;
+
+// Анимации
+$transition-duration: 0.3s;
+$transition-base: all $transition-duration ease-in-out;
+
+// Шрифты
+$font-family: "Poppins", sans-serif;
+
+// ==========================================================================
+// ЦВЕТОВАЯ ПАЛИТРА (UI-KIT) — ПРОЕКТ WEBOVIO
+// ==========================================================================
+
+$white-color: #fff;
+$black-color: #000;
+
+$accent-color: #4d533c;
+$yellow-color: #ffd723;
+$grey-light-color: #ead7d3;
+$border-color: #f5f6f7;
+$text-color: rgba(#213842, 0.6);
+$text-sec-color: #b6c197;
+$span-color: #d4d6d4;
+$bg-color: #fafafa;
+$copy-color: #b5c096;

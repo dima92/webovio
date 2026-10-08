@@ -1,0 +1,201 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.cta {
+  position: relative;
+  z-index: 5;
+  margin-bottom: to-rem(-150);
+
+  @include respond-to("tablet") {
+    margin-bottom: to-rem(-100);
+  }
+
+  &__body {
+    background-color: $white-color;
+    padding: fluid(80, 40) fluid(100, 24);
+    border: 1px solid $border-color;
+    box-shadow: 0 to-rem(30) to-rem(60) rgba($black-color, 0.05);
+    @include flex(column, flex-start, flex-start, $gap: 32);
+
+    @include respond-to("tablet") {
+      @include flex(column, center, center, $gap: 24);
+      text-align: center;
+    }
+  }
+
+  &__title {
+    max-width: to-rem(822);
+    color: $accent-color;
+    font-weight: 700;
+    @include fluid-text(60, 32, 1.23);
+
+    @include respond-to("tablet") {
+      max-width: 100%;
+    }
+  }
+
+  &__link {
+    flex-shrink: 0;
+    color: $span-color;
+    border-bottom-color: $span-color;
+
+    &::before {
+      border-left-color: $span-color;
+    }
+
+    @include hover {
+      color: $yellow-color;
+      border-bottom-color: $yellow-color;
+
+      &::before {
+        border-left-color: $yellow-color;
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: $accent-color;
+  color: $white-color;
+  padding-top: fluid(230, 160);
+  padding-bottom: fluid(60, 30);
+
+  &__contacts {
+    @include flex(row, flex-start, flex-start, $gap: 100);
+    border-bottom: 1px solid rgba($white-color, 0.1);
+    padding-bottom: fluid(50, 30);
+    margin-bottom: fluid(60, 40);
+
+    @include respond-to("tablet") {
+      @include flex(column, center, center, $gap: 24);
+      text-align: center;
+    }
+  }
+
+  &__contact-item {
+    @include flex(column, flex-start, flex-start, $gap: 8);
+
+    @include respond-to("tablet") {
+      align-items: center;
+    }
+  }
+
+  &__contact-label {
+    font-size: to-rem(14);
+    color: $text-sec-color;
+    opacity: 0.7;
+  }
+
+  &__contact-value {
+    font-weight: 600;
+    @include fluid-text(20, 16);
+  }
+
+  &__main {
+    @include grid($cols: 4, $gap: 40);
+    border-bottom: 1px solid rgba($white-color, 0.1);
+    padding-bottom: fluid(60, 40);
+    margin-bottom: to-rem(40);
+
+    @include respond-to("tablet") {
+      @include grid($cols: 2, $gap: 30);
+    }
+    @include respond-to("mobile") {
+      @include grid($cols: 1, $gap: 30);
+    }
+  }
+
+  &__column-title {
+    color: $white-color;
+    font-weight: 700;
+    font-size: to-rem(14);
+    letter-spacing: 0.05em;
+    margin-bottom: to-rem(24);
+  }
+
+  &__list {
+    @include flex(column, flex-start, flex-start, $gap: 12);
+
+    a {
+      font-size: to-rem(14);
+      color: rgba($white-color, 0.7);
+
+      @include hover {
+        color: $yellow-color;
+      }
+    }
+  }
+
+  &__text {
+    font-size: to-rem(14);
+    color: rgba($white-color, 0.7);
+    margin-bottom: to-rem(16);
+  }
+
+  &__email {
+    font-weight: 700;
+    color: $white-color;
+    @include fluid-text(22, 16);
+    margin-bottom: to-rem(24);
+  }
+
+  &__socials {
+    // Используем твой миксин флекса: выстраиваем в ряд, раскидываем по ширине 171px
+    @include flex(row, space-between, center);
+    width: to-rem(171);
+    height: to-rem(34);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__social-item {
+    flex-shrink: 0;
+  }
+
+  &__social-link {
+    @include flex(row, center, center);
+    width: to-rem(34);
+    height: to-rem(34);
+    border-radius: 50%;
+    background-color: rgba($white-color, 0.05);
+    color: rgba($white-color, 0.4);
+    transition: $transition-base;
+
+    svg {
+      width: to-rem(16);
+      height: to-rem(16);
+    }
+
+    &--active {
+      background-color: $yellow-color;
+      color: $accent-color;
+    }
+
+    @include hover {
+      background-color: rgba($white-color, 0.2);
+      color: $white-color;
+      transform: translateY(to-rem(-2));
+    }
+
+    &--active {
+      @include hover {
+        background-color: $white-color;
+        color: $accent-color;
+      }
+    }
+  }
+
+  &__bottom {
+    @include flex(row, space-between, center);
+
+    @include respond-to("mobile") {
+      @include flex(column, center, center, $gap: 16);
+    }
+  }
+
+  &__copy {
+    font-size: to-rem(14);
+    color: rgba($white-color, 0.5);
+  }
+}

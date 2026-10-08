@@ -1,0 +1,99 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.services {
+  padding-block: fluid(100, 60);
+  background-color: $white-color;
+
+  &__header {
+    position: relative;
+    max-width: to-rem(607);
+    padding-top: to-rem(30);
+    margin-bottom: fluid(60, 40);
+
+    @include respond-to("tablet") {
+      text-align: center;
+      margin-inline: auto;
+    }
+  }
+
+  &__title {
+    color: $accent-color;
+    font-weight: 700;
+    @include fluid-text(36, 24, 1.28);
+  }
+
+  &__grid {
+    @include grid($cols: 4, $gap: 30);
+
+    @include respond-to("tablet") {
+      @include grid($cols: 2, $gap: 30);
+    }
+
+    @include respond-to("mobile") {
+      @include grid($cols: 1, $gap: 24);
+    }
+  }
+
+  &__card {
+    @include flex(column, flex-start, flex-start);
+    height: 100%;
+  }
+
+  &__card-title {
+    color: $accent-color;
+    font-weight: 700;
+    margin-bottom: to-rem(20);
+    @include fluid-text(18, 16, 1.42);
+  }
+
+  &__card-text {
+    max-width: to-rem(194);
+    color: $text-color;
+    font-weight: 400;
+    margin-bottom: to-rem(30);
+    flex-grow: 1;
+    @include fluid-text(14, 13, 1.86);
+  }
+
+  &__link {
+    @include flex(row, flex-start, center, $isInline: true, $gap: 12);
+    color: $yellow-color;
+    font-weight: 700;
+    @include fluid-text(16, 14);
+    border-bottom: to-rem(1) solid $yellow-color;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: to-rem(5) solid transparent;
+      border-bottom: to-rem(5) solid transparent;
+      border-left: to-rem(8) solid $yellow-color;
+      color: $yellow-color;
+    }
+
+    @include hover {
+      transform: translateX(to-rem(4));
+    }
+
+    .services__card:not(:first-child) & {
+      border-bottom-color: $span-color;
+      color: $span-color;
+
+      &::before {
+        border-left-color: $span-color;
+      }
+
+      @include hover {
+        color: $yellow-color;
+        border-bottom-color: $yellow-color;
+
+        &::before {
+          border-left-color: $yellow-color;
+        }
+      }
+    }
+  }
+}

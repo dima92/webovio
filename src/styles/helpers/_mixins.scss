@@ -1,0 +1,100 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+@use "./functions" as *;
+@use "./media" as *;
+@use "../variables" as *;
+
+// 1. АДАПТИВНЫЙ ТЕКСТ (Улучшенная версия)
+@mixin fluid-text($max: 68, $min: 14, $line-height: null) {
+  font-size: fluid($max, $min);
+
+  @if $line-height {
+    @if math.is-unitless($line-height) {
+      line-height: $line-height;
+    } @else {
+      $unitless-lh: if(
+        math.is-unitless($line-height),
+        $line-height,
+        math.div($line-height, 1px)
+      );
+      $unitless-max: if(math.is-unitless($max), $max, math.div($max, 1px));
+      line-height: math.div($unitless-lh, $unitless-max);
+    }
+  }
+}
+
+// 2. БЫСТРЫЙ ФЛЕКС-ЦЕНТР
+@mixin flex(
+  $direction: row,
+  $justify: center,
+  $align: center,
+  $gap: null,
+  $wrap: null,
+  $isInline: false
+) {
+  display: if($isInline, inline-flex, flex);
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+
+  @if $gap {
+    @if meta.type-of($gap) ==
+      "string" or
+      string.index(meta.inspect($gap), "clamp")
+    {
+      gap: $gap;
+    } @else {
+      gap: to-rem($gap);
+    }
+  }
+}
+
+// 3. Универсальный CSS Grid
+@mixin grid($cols: 1, $gap: 0, $rows: null, $align: null, $justify: null) {
+  display: grid;
+
+  @if meta.type-of($cols) ==
+    "number" and
+    math.is-unitless($cols) and
+    $cols <=
+    12
+  {
+    grid-template-columns: repeat($cols, 1fr);
+  } @else {
+    grid-template-columns: repeat(auto-fit, minmax(to-rem($cols), 1fr));
+  }
+
+  @if $gap {
+    gap: to-rem($gap);
+  }
+
+  @if $rows {
+    grid-template-rows: $rows;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+  @if $justify {
+    justify-items: $justify;
+  }
+}
+
+// 4. СКРЫТЫЙ ЭЛЕМЕНТ
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}

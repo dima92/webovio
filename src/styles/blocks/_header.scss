@@ -1,0 +1,41 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding-block: to-rem(24);
+
+  &__container {
+    @include flex(row, space-between, center);
+  }
+
+  &__logo {
+    flex-shrink: 0;
+
+    @include hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__burger {
+    @include flex(column, center, center, 4);
+    width: to-rem(40);
+    height: to-rem(40);
+    background: $border-color;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    cursor: pointer;
+
+    span {
+      display: block;
+      width: to-rem(18);
+      height: to-rem(2);
+      background-color: $black-color;
+    }
+  }
+}
